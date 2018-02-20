@@ -1,0 +1,88 @@
+type Query {
+  me: User
+  invoice(id: ID!): Invoice!
+  invoices: [Invoice!]!
+}
+
+type Mutation {
+  signup(email: String!, password: String!): AuthPayload!
+  login(email: String!, password: String!): AuthPayload!
+  createInvoice(data: InvoiceInput!): Invoice!
+  payInvoice(data: PaymentInput!): Invoice!
+  simulate(data: InvoiceInput!): Invoice!
+}
+
+type Subscription {
+  invoice(id: ID!): Invoice!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type User {
+  id: ID!
+  email: String!
+}
+
+type Payment {
+  id: ID!
+  payeePaymentReference: String
+  paymentReference: String
+  callbackUrl: String!
+  payerAlias: String!
+  payeeAlias: String!
+  amount: String!
+  currency: String!
+  message: String!
+  status: String
+  dateCreated: String
+  datePaid: String
+  simulated: Boolean
+  errorCode: String
+  errorMessage: String
+}
+
+input PaymentInput {
+  id: ID!
+  payeePaymentReference: String
+  paymentReference: String
+  callbackUrl: String!
+  payerAlias: String!
+  payeeAlias: String!
+  amount: String!
+  currency: String!
+  message: String!
+  status: String
+  dateCreated: String
+  datePaid: String
+  errorCode: String
+  errorMessage: String
+}
+
+type Invoice {
+  id: ID!
+  customer: String!
+  vendor: String!
+  status: String!
+  amount_due: String!
+  currency: String!
+  created_at: String!
+  expires_at: String!
+  paid_at: String
+  meta: String
+  payment: Payment
+}
+
+input InvoiceInput {
+  id: ID
+  customer: ID!
+  amount: String!
+}
+
+input QueryInput {
+  id: String
+  customer: String
+  status: String
+}

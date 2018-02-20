@@ -1,0 +1,76 @@
+scalar Date
+scalar DateTime
+
+
+type Organization {
+    name: String
+}
+type Person {
+    name: String
+}
+type Product {
+
+}
+type OrderItem {
+    orderItemNumber: String
+    orderQuantity: Number
+    orderedItem: Product
+    orderItemStatus: OrderStatus
+}
+type OrderStatus {
+
+}
+
+type Offer {
+    acceptedPaymentMethod: PaymentMethod
+    aggregateRating: AggregateRating
+    availability: ItemAvailability 
+    availabilityEnds: DateTime
+    availabilityStarts: DateTime
+    availableAtOrFrom: Place
+    availableDeliveryMethod: DeliveryMethod 
+    category: String
+    deliveryLeadTime: QuantitativeValue 
+}
+type Order {
+    offeredItem: [Offer!]
+    customer: Person
+    seller: Organization
+    description: String
+    orderDate: Date
+    orderNumber: String
+    orderStatus: String
+    paymentUrl: String
+}
+
+type PaymentMethod {
+
+}
+type Organization {
+    name: String
+}
+
+type PriceSpecification {
+    price: 0.00,
+    priceCurrency: USD
+
+}
+
+type PaymentStatus {
+
+}
+
+type Invoice {
+    accountId: String
+    broker: Organization
+    confirmationNumber: String
+    customer: Person
+    minimumPaymentDue: PriceSpecification
+    paymentDueDate: Date
+    paymentMethod: PaymentMethod
+    paymentStatus: PaymentStatus
+    provider: Organization
+    referencesOrder: [Order!]
+    totalPaymentDue: PriceSpecification
+    customer: Person
+}
